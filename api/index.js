@@ -15,7 +15,7 @@ console.log(process.env.BASEURL);
 // *******Middleswares*********//
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 const storage = memoryStorage();

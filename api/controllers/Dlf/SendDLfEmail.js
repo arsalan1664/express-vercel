@@ -35,7 +35,7 @@ async function SendDlfEmailClient(data) {
     const { name, email, phone, message } = data;
     const mailOptions = {
       from: "GradesUp® Alert <support@gradesup.org>",
-      to: email,
+      to: `${email}`,
       subject: `Thank You For Choosing Gogrades.org`,
       html: `<html lang="en">
   <head>
