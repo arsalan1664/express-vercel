@@ -19,9 +19,9 @@ async function AfterPayment(req, res) {
     const info2 = await clientAfterPaymentSendEmail(data);
     console.log(info, info2);
     if (xxxpayment_status === false) {
-      return res.redirect("https://gradesup.org/order-form");
+      return res.redirect(`${process.env.FRONTEND_URL}/order-form`);
     }
-    return res.redirect("https://gradesup.org/thankyou");
+    return res.redirect(`${process.env.FRONTEND_URL}/thankyou`);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Something went wrong" });

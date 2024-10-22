@@ -38,8 +38,7 @@ async function clientBeforePaymentSendEmail(data) {
   const orderToken = Buffer.from(OrderID).toString("base64");
 
   const finalUrl = Buffer.from(
-    "http://localhost:3000/send-order-form-after"
-    // "https://express-vercel-six-orcin.vercel.app/send-order-form-after"
+    `${process.env.BASEURL}/send-order-form-after`
   ).toString("base64");
 
   const paymentLinkStripe = `https://mastermindsenterprises.com/stripe-version-2/secure-pay-external-2.php?cevpr_havg=${finalPaymentUnit}&cevpr_nzbhag=${finalTotalAmount}&cebqhpg_anzr=${finalProductName}&gbxra_rkgreany=${orderToken}&url=${finalUrl}`;
