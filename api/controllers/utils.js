@@ -1,12 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
 const nodemailer = require("nodemailer");
-
-// ********* Prisma ********//
-const globalForPrisma = globalThis;
-const prisma = globalForPrisma.prisma ?? new PrismaClient();
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
-
-const db = prisma;
 
 // ********* Nodemailer ********//
 const transporter = nodemailer.createTransport({
@@ -19,4 +11,4 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports = { db, transporter };
+module.exports = { transporter };
