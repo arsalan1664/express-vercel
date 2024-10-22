@@ -1,6 +1,6 @@
 const { transporter, sendMailPromise } = require("../utils.js");
 
-async function SendDlfEmail(data, res) {
+async function SendDlfEmail(data) {
   try {
     const { name, email, phone, message } = data;
     const mailOptions = {
@@ -30,7 +30,7 @@ async function SendDlfEmail(data, res) {
   }
 }
 
-async function SendDlfEmailClient(data, res) {
+async function SendDlfEmailClient(data) {
   try {
     const { name, email, phone, message } = data;
     const mailOptions = {
