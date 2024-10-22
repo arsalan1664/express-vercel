@@ -1,12 +1,13 @@
-const { transporter } = require("../utils.js");
+const { transporter, sendMailPromise } = require("../utils.js");
 
-function SendDlfEmail(data, res) {
-  const { name, email, phone, message } = data;
-  const mailOptions = {
-    from: "support@gradesup.org",
-    to: "support@gradesup.org",
-    subject: "DLF Form Entry | Gradesup.org",
-    html: `
+async function SendDlfEmail(data, res) {
+  try {
+    const { name, email, phone, message } = data;
+    const mailOptions = {
+      from: "support@gradesup.org",
+      to: "support@gradesup.org",
+      subject: "DLF Form Entry | Gradesup.org",
+      html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6">
           <h2 style="color: #4a90e2">New DLF Form Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
@@ -18,27 +19,25 @@ function SendDlfEmail(data, res) {
           <p style="color: #888">Thank you for reaching out to us!</p>
         </div>  
         `,
-  };
+    };
 
-  // Send the email
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending email:", error);
-      res.status(500).json({ error: "Error sending email" });
-    } else {
-      console.log("Email sent:", info.response);
-      res.json({ message: "Email sent successfully" });
-    }
-  });
+    // Send the email
+    const info = await sendMailPromise(mailOptions);
+    console.log("Email sent:", info.response);
+  } catch (error) {
+    console.error("Error sending dlf server  email:", error);
+    throw new Error("Error sending dlf server  email");
+  }
 }
 
-function SendDlfEmailClient(data, res) {
-  const { name, email, phone, message } = data;
-  const mailOptions = {
-    from: "GradesUp® Alert <support@gradesup.org>",
-    to: email,
-    subject: `Thank You For Choosing Gogrades.org`,
-    html: `<html lang="en">
+async function SendDlfEmailClient(data, res) {
+  try {
+    const { name, email, phone, message } = data;
+    const mailOptions = {
+      from: "GradesUp® Alert <support@gradesup.org>",
+      to: email,
+      subject: `Thank You For Choosing Gogrades.org`,
+      html: `<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -226,18 +225,14 @@ function SendDlfEmailClient(data, res) {
   </body>
 </html>
 `,
-  };
+    };
 
-  // Send the email
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending client email:", error);
-      res.status(500).json({ error: "Error sending client email" });
-    } else {
-      console.log("Email sent:", info.response);
-      res.json({ message: "Client email sent successfully" });
-    }
-  });
+    const info = await sendMailPromise(mailOptions);
+    console.log("Email sent:", info.response);
+  } catch (error) {
+    console.error("Error sending dlf client email:", error);
+    throw new Error("Error sending dlf client  email");
+  }
 }
 
 module.exports = { SendDlfEmail, SendDlfEmailClient };

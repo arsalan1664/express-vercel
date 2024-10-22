@@ -11,4 +11,16 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports = { transporter };
+function sendMailPromise(mailOptions) {
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        reject(error); // Reject the promise if there's an error
+      } else {
+        resolve(info); // Resolve the promise with the email info
+      }
+    });
+  });
+}
+
+module.exports = { transporter, sendMailPromise };
