@@ -1,10 +1,11 @@
 const { SendDlfEmail, SendDlfEmailClient } = require("./SendDLfEmail.js");
 
-function Dlf(req, res) {
+async function Dlf(req, res) {
   try {
     const data = req.body;
-    SendDlfEmail(data);
-    SendDlfEmailClient(data);
+    const info = await SendDlfEmail(data);
+    const info2 = await SendDlfEmailClient(data);
+    console.log(info, info2);
     return res.status(200).json({ message: "OK", data });
   } catch (error) {
     console.log(error);
