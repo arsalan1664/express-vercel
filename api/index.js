@@ -1,7 +1,8 @@
 const express = require("express");
-const { Dlf } = require("./controllers/Dlf");
+const Dlf = require("./controllers/Dlf.js");
 const app = express();
 
+app.use(express.json());
 app.get("/", (req, res) => res.send("Express on Vercel"));
 app.post("/dlf", Dlf);
 
