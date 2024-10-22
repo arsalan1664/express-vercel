@@ -6,6 +6,7 @@ const BeforePayment = require("./controllers/BeforePayment/BeforePyment.js");
 const AfterPayment = require("./controllers/AfterPayment/AfterPayment.js");
 const { memoryStorage } = require("multer");
 const multer = require("multer");
+const createOrdersTable = require("./controllers/tables.js");
 const app = express();
 
 // *******Middleswares*********//
@@ -18,7 +19,11 @@ const storage = memoryStorage();
 const upload = multer({ storage });
 
 // ************* Test **********//
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", async (req, res) => {
+  const table = await createOrdersTable().catch(console.error);
+  console.log("table created", table);
+  return res.send("Express on Vercel");
+});
 
 // ************* DLF **********//
 app.post("/send-email", Dlf);
