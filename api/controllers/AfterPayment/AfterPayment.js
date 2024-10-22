@@ -15,7 +15,7 @@ async function AfterPayment(req, res) {
       LIMIT 1;
     `;
     console.log("data", rows, after_payment_token);
-    const data = rows;
+    const data = rows[0];
     const info = await supportAfterPaymentSendEmail(data);
     const info2 = await clientAfterPaymentSendEmail(data);
     console.log(info, info2);

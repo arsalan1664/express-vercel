@@ -24,7 +24,7 @@ const BeforePayment = async (req, res) => {
     const order = rows[0];
     const info = await clientBeforePaymentSendEmail(data);
     const info2 = await supportBeforePaymentSendEmail(data, orderFiles);
-    console.log(info, info2);
+    console.log(info, info2, order);
     return res.status(200).json({ data: { orderID: order.OrderID } });
   } catch (error) {
     console.log(error);
