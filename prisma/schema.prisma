@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db"
+// }
+
+model Order {
+  Id                String   @id @default(cuid())
+  OrderID           String?
+  TypeOfPaper       String?
+  TaskLevel         String?
+  SelectSubject     String?
+  ReferencingStyle  String?
+  NoOfSources       String?
+  PaperStandard     String?
+  PreferredLanguage String?
+  NoOfPages         String?
+  PaperFormat       String?
+  Deadline          String?
+  Topic             String?
+  UserName          String?
+  UserEmail         String?
+  UserPhone         String?
+  Country           String?
+  PostalCode        String?
+  UserInfo          String?
+  TotalAmount       String?
+  PricePerPage      String?
+  CurrencyUnit      String?
+  CreatedAt         DateTime @default(now())
+  UpdatedAt         DateTime @updatedAt
+}
