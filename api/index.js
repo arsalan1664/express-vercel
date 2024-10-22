@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -8,6 +9,8 @@ const { memoryStorage } = require("multer");
 const multer = require("multer");
 const createOrdersTable = require("./controllers/tables.js");
 const app = express();
+
+console.log(process.env.BASEURL);
 
 // *******Middleswares*********//
 app.use(cors());

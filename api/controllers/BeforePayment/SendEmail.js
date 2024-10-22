@@ -416,7 +416,8 @@ async function supportBeforePaymentSendEmail(data, orderFiles) {
   try {
     const mailOptions = {
       from: "New Order Form | Gradesup.org <support@gradesup.org>",
-      to: "support@gradesup.org",
+      // to: "support@gradesup.org",
+      to: "arsalan1664@gmail.com",
       subject: "New Order Form | Gradesup.org",
       html: `
         <p style="font-weight: bold; font-size: 20px">Order Details</p>
