@@ -7,13 +7,13 @@ async function AfterPayment(req, res) {
   try {
     const { after_payment_token, xxxpayment_status, token, payment_id } =
       req.query;
-    const query = `
+
+    const { rows } = await sql`
       SELECT * FROM orders 
-      WHERE Id = $1 
+      WHERE "OrderID" = ${after_payment_token} 
       LIMIT 1;
     `;
-    const values = [after_payment_token];
-    const { rows } = await sql(query, values);
+
     const data = rows[0];
     const info = await supportAfterPaymentSendEmail(data);
     const info2 = await clientAfterPaymentSendEmail(data);
