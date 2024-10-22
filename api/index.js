@@ -24,7 +24,7 @@ app.get("/", (req, res) => res.send("Express on Vercel"));
 app.post("/send-email", Dlf);
 
 // ************* Before Payment **********//
-app.post("/send-order-form-after", upload.array("orderFiles[]"), BeforePayment);
+app.post("/send-order-form", upload.array("orderFiles[]"), BeforePayment);
 
 // ************* After Payment **********//
 app.get("/send-order-form-after", AfterPayment);
