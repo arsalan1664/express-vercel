@@ -1,3 +1,4 @@
+const { sql } = require("@vercel/postgres");
 const {
   supportAfterPaymentSendEmail,
   clientAfterPaymentSendEmail,
@@ -13,8 +14,8 @@ async function AfterPayment(req, res) {
       WHERE "OrderID" = ${after_payment_token} 
       LIMIT 1;
     `;
-
-    const data = rows[0];
+    console.log("data", rows, after_payment_token);
+    const data = rows;
     const info = await supportAfterPaymentSendEmail(data);
     const info2 = await clientAfterPaymentSendEmail(data);
     console.log(info, info2);

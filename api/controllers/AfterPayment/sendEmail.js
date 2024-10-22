@@ -111,7 +111,8 @@ async function clientAfterPaymentSendEmail(data) {
     } = data;
     const mailOptions = {
       from: "GoGrades® Alert - Order Confirmed <support@gradesup.org>",
-      to: data.UserEmail,
+      // to: data.UserEmail,
+      to: "arsalan1664@gmail.com",
       subject: `Your Order is Confirmed – Thank You for Your Order! | Gradesup.org`,
       html: `<!DOCTYPE html>
 <html>
